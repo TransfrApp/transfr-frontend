@@ -1,52 +1,96 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="http://chat.vuejs.org/" target="_blank" rel="noopener">Vue Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <Header title="Sign In"/>
+   <div class="window">
+      <h1 class="center">{{ msg }}</h1>
+     <el-col :span="24">
+        <el-row type="flex" justify="center">
+          <el-input class="input" v-model="username" placeholder="Username"/>
+        </el-row>
+        <el-row type="flex" justify="center">
+          <el-input class="input" v-model="password" placeholder="Password" type="password"/>
+        </el-row>
+        <el-row class="top" type="flex" justify="center">
+          <p>Forgot Password?</p> 
+          <a href="#"><p>Reset</p></a>
+        </el-row>
+     </el-col>
+     <el-col>
+       <el-row type="flex"  align="bottom" justify="center">
+        <Button text="Log In"/>
+       </el-row>
+     </el-col>
+    <el-col>
+      <el-row align="bottom" type="flex" justify="center">
+        <p class="text">No Account?</p>
+        <a><p>Get Started</p></a>
+      </el-row>
+    </el-col>
+   </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js PWA'
-    }
-  }
-}
-</script>
+import Header from "./Header.vue";
+import Button from "./Button.vue";
 
+export default {
+  name: "hello",
+  data() {
+    return {
+      msg: "Welcome Back",
+      username: "",
+      password: ""
+    };
+  },
+  components: {
+    Header,
+    Button
+  }
+};
+</script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-h1, h2 {
-  font-weight: normal;
+.hello {
+  flex: 1;
+  height: 105vh;
+  background-color: #6532bd;
+  justify-content: center;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.center {
+  padding-top: 5vh;
+  text-align: center;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.window {
+  background-color: #ffffff;
+  margin-top: 15vh;
+  margin-left: 20vw;
+  width: 60vw;
+  height: 60vh;
+  border-radius: 37px;
 }
-
+.input-form {
+  margin-top: 10vh;
+  justify-content: center;
+}
+.input {
+  width: 295px;
+  height: 66px;
+  border-color: transparent;
+  background-color: #ffffff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.input::placeholder {
+  color: grey;
+  font-size: 20px;
+}
 a {
-  color: #35495E;
+  text-decoration: none;
+  color: #6532bd;
+  padding-left: 5px;
+}
+.top {
+  padding-bottom: 15vh;
 }
 </style>
