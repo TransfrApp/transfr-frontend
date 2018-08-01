@@ -20,7 +20,9 @@
      </el-col>
      <el-col>
        <el-row type="flex"  align="bottom" justify="center">
-        <Button v-on:click="login" text="Log In"/>
+        <router-link :to="{path: '/home'}">
+            <Button v-on:click="login" text="Sign Up"/>
+        </router-link>
        </el-row>
      </el-col>
     <el-col>

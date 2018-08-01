@@ -10,18 +10,22 @@
         </el-row>
         <el-row class="top" type="flex" justify="center">
           <p>Forgot Password?</p> 
-          <a href="#"><p>Reset</p></a>
+          <p class="hotlink">Reset</p>
         </el-row>
      </el-col>
      <el-col>
        <el-row type="flex"  align="bottom" justify="center">
-        <Button v-on:click="login" text="Log In"/>
+       <router-link :to="{path: '/home'}">
+          <Button v-on:click="login" text="Log In"/>
+       </router-link>
        </el-row>
      </el-col>
     <el-col>
-      <el-row align="bottom" type="flex" justify="center">
+      <el-row align="center" type="flex" justify="center">
         <p class="text">No Account?</p>
-        <a><p>Get Started</p></a>
+        <router-link class="route-link" :to="{path: '/home'}">
+          <p class="hotlink">Get Started</p>
+        </router-link>
       </el-row>
     </el-col>
    </div>
@@ -65,12 +69,15 @@ export default {
   color: grey;
   font-size: 20px;
 }
-a {
+.hotlink {
   text-decoration: none;
   color: #6532bd;
   padding-left: 5px;
 }
 .top {
   padding-bottom: 15vh;
+}
+.route-link {
+  text-decoration: none;
 }
 </style>

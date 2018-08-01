@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Element from 'element-ui'
+import Vuex from 'vuex';
 import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(Element)
+Vue.use(Element);
+Vue.use(Vuex);
 
 Vue.config.productionTip = false
 
