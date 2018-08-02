@@ -23,17 +23,20 @@
     <el-col>
       <el-row align="center" type="flex" justify="center">
         <p class="text">No Account?</p>
-        <router-link class="route-link" :to="{path: '/home'}">
-          <p class="hotlink">Get Started</p>
-        </router-link>
+        <a @click="handleStart"><p class="hotlink">Get Started</p></a>
       </el-row>
     </el-col>
    </div>
 </template>
 <script>
+import { mapState, mapActions, mapMutations } from "vuex";
 import Button from './Button.vue';
 
 export default {
+  name: 'LoginWindow',
+  computed: {
+    // ...mapState(['user']),
+  },
   data() {
     return {
       msg: "Welcome Back!"
@@ -41,6 +44,12 @@ export default {
   },
   components: {
     Button,
+  },
+  methods: {
+     ...mapMutations(['SET_LOGIN']),
+    handleStart: () => {
+     this.setLogin(true);
+    }
   }
 };
 </script>

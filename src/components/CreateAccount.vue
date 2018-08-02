@@ -28,7 +28,7 @@
     <el-col>
       <el-row align="bottom" type="flex" justify="center">
         <p class="text">Already have an Account?</p>
-        <a><p>Log In</p></a>
+        <a @click="handleLogin"><p>Log In</p></a>
       </el-row>
     </el-col>
    </div>
@@ -37,7 +37,11 @@
 import Button from './Button.vue';
 
 export default {
-  data() {
+name: 'CreateAccount',
+// computed: {
+//     ...mapState(['login'])
+// },
+data() {
     return {
       msg: "Welcome",
       businessName: '',
@@ -49,6 +53,12 @@ export default {
   },
   components: {
     Button,
+  },
+  methods: {
+    // ...mapMutations(['SET_LOGIN']),
+      handleLogin(){
+          alert("Testing Handle Login")
+      }
   }
 };
 </script>

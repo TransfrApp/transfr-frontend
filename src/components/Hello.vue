@@ -1,17 +1,21 @@
 <template>
   <div class="hello">
-    <Header v-if="login === true" title="Sign In"/>
-    <Header v-else title="Create An Account"/>
-    <LoginWindow v-if="login === true"/>
-    <CreateAccount v-else/>
+    <Header v-if="authFlow === 'signin'" title="Sign In"/>
+    <Header v-if="authFlow === 'create'" title="Create An Account"/>
+     <Header v-if="authFlow === 'type'" title="Account Set Up"/>
+    <LoginWindow v-if="authFlow === 'signin'"/>
+    <CreateAccount v-if="authFlow === 'create'"/>
+    <AccountType v-if="authFlow === 'type'"/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Header from "./Header.vue";
 import Button from "./Button.vue";
 import LoginWindow from './LoginWindow';
 import CreateAccount from './CreateAccount';
+import AccountType from './AccountType';
 
 export default {
   name: "hello",
@@ -20,18 +24,28 @@ export default {
       msg: "Welcome Back",
       username: "",
       password: "",
-      login: true,
+      authFlow: 'type', // can be 'sigin', 'create', 'type
     };
+  }, 
+  computed: {
+    // ...mapState(['user']),
   },
   components: {
     Header,
     Button,
     LoginWindow,
-    CreateAccount
+    CreateAccount,
+    AccountType
   },
   methods: {
+    // ...mapMutations({
+    //    SET_LOGIN: 'setLogin',
+    // }),
     login() {
       alert("Login Pressed")
+    },
+    created () {
+      console.log("Store", store);
     }
   }
 };
