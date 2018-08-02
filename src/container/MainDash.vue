@@ -5,8 +5,8 @@
             <div class="products">
                 <h4>You Have No Products</h4>
                 <h4>Click the button below to add a product</h4>
-                <div class="addProd">
-                    <i class="el-icon-plus addProdIcon"></i>
+                <div class="add-product-square">
+                    <i class="el-icon-plus add-product-icon"></i>
                     <h4>Add Product</h4>
                 </div>
             </div>
@@ -43,15 +43,15 @@ export default {
     align-content: center;
     align-items: center;
     background-color: #F5F9FB;
-    width: 100vw;
-    height: 90vh;
+    width: 100%;
+    height: 90%;
     position: fixed;
 }
 h4 {
     color: #B1B5C2;
     padding: 0;
 }
-.addProd {
+.add-product-square {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,9 +60,9 @@ h4 {
     height: 165px;
     width: 165px;
     border-radius: 18px;
-    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px #C9C9C9;
 }
-.addProdIcon {
+.add-product-icon {
     color: #B1B5C2;
     font-size: 55px;
 }
@@ -84,6 +84,7 @@ h4 {
     background-color: #ffffff;
     height: 640px;
     width: 305px;
+    box-shadow: 0px 5px 25px 0px #C9C9C9;
 }
 .product-list {
     justify-content: center;
