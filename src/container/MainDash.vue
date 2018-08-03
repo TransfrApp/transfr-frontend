@@ -317,8 +317,9 @@ h4 {
     align-items: center;
     align-content: center;
     background-color: #ffffff;
-    height: 640px;
-    width: 305px;
+    height: 95%;
+    width: 22%;
+    margin-right: 4%;
     box-shadow: 0px 5px 25px 0px #C9C9C9;
 }
 .empty-product-list {
@@ -366,7 +367,7 @@ el-dialog {
     justify-content: flex-start;
     border: 1px solid black;
     height: 100%;
-    width: 65%;
+    width: 75%;
     margin: 0
 }
 .quantity-current-checkout{
@@ -408,7 +409,7 @@ el-dialog {
     text-align: center;
     flex-direction: column;
     margin: 1%;
-    width: 16%;
+    width: 14%;
     justify-content: center;
     align-content: center;
     align-items: center;
