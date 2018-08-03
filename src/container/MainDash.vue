@@ -96,11 +96,15 @@
              <el-dialog 
                 :modalAppendToBody="false"
                 title="Pay With"
+                custom-class="payment-modal"
                 :visible.sync="showPaymentTypeModal"
-                width="30%">
+                width="25%">
                 <div class="crypto-payment-square" v-for="coin in coins">
                     <img :src="coin.imageUrl" class="crypto-icon" />
                     <span class="crypto-icon-subtext">{{coin.name}}</span>
+                    <el-radio-group v-model="selectedCoin" size="large" class="select-coin-radio-button">
+                        <el-radio :label="coin.name"/>
+                    </el-radio-group>
                 </div>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -122,66 +126,31 @@ export default {
             dialogVisible: false,
             showDiscountModal: false,
             showPaymentTypeModal: false,
+            selectedCoin: "",
             coins: [
                 {
-                   name: "Bitcoin",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/btc.png",
-                },
-                {
-                   name: "Dash",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/dash.png",
-                },
-                {
-                   name: "Vechain",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/ven.png",
-                },
-                {
-                   name: "Tether",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/usdt.png",
-                },
-                {
-                   name: "Ethereum",
+                   name: "ETH",
                    imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/eth.png",
                 },
                 {
-                   name: "Lisk",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/lsk.png",
+                   name: "REQ",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/req.png",
                 },
                 {
-                   name: "Neo",
+                   name: "KNC",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/knc.png",
+                },
+                {
+                   name: "DGX",
+                   imageUrl: "https://awebanalysis.com/img/coins/32/digix-gold-token.png",
+                },
+                {
+                   name: "DAI",
+                   imageUrl: "https://awebanalysis.com/img/coins/32/dai.png",
+                },
+                {
+                   name: "NEO",
                    imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/neo.png",
-                },
-                {
-                   name: "Eos",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/eos.png",
-                },
-                {
-                   name: "Siacoin",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/sc.png",
-                },
-                {
-                   name: "Qtum",
-                   imageUrl: "https://raw.githubusercontent.com/dziungles/cryptocurrency-logos/master/coins/32x32/qtum.png",
-                },
-                {
-                   name: "Zcash",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/zec.png",
-                },
-                {
-                   name: "Digixdao",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/dgd.png",
-                },
-                {
-                   name: "Steem",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/steem.png",
-                },
-                {
-                   name: "Rchain",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/rhoc.png",
-                },
-                {
-                   name: "Waves",
-                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/waves.png",
                 },
             ],
             products:[
@@ -442,21 +411,52 @@ el-dialog {
     align-content: center;
 }
 .crypto-payment-square {
-    height: 5rem;
-    width: 5rem;
-    border: 1px solid gray;
+    height: 2rem;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
     border-radius: 15px;
-    display: inline-block;
-    max-width: 25%;
-    text-align: center;
-    margin: 5px;
-}
-
-.crypto-icon {
-    margin-top: 20%;
+    display: flex;
+    align-items: center;
 }
 
 .crypto-icon-subtext {
-    display: block;
+    margin-left: 2%;
+    display: inline-block;
+    font-weight: bold;
 }
+
+.select-coin-radio-button {
+    margin-left: auto;
+}
+.el-radio__label {
+    display: none;
+}
+
+.el-radio__inner {
+    width: 22px;
+    height: 22px;
+}
+
+.el-radio__inner:hover {
+    border-color: #6532bd;
+}
+
+.el-radio__inner::after {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #6532bd;
+}
+
+.el-radio__input.is-checked .el-radio__inner {
+    border-color: grey;
+    background: white;
+}
+
+.payment-modal {
+    border-radius: 25px;
+}
+
 </style>
