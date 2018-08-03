@@ -1,11 +1,11 @@
 <template>
   <div class="hello">
-    <Header v-if="authFlow === 'signin'" title="Sign In"/>
-    <Header v-if="authFlow === 'create'" title="Create An Account"/>
-     <Header v-if="authFlow === 'type'" title="Account Set Up"/>
-    <LoginWindow v-if="authFlow === 'signin'"/>
-    <CreateAccount v-if="authFlow === 'create'"/>
-    <AccountType v-if="authFlow === 'type'"/>
+    <Header v-if="this.$store.state.loginFlow === 'signin'" title="Sign In"/>
+    <Header v-if="this.$store.state.loginFlow === 'create'" title="Create An Account"/>
+     <Header v-if="this.$store.state.loginFlow === 'type'" title="Account Set Up"/>
+    <LoginWindow v-if="this.$store.state.loginFlow === 'signin'"/>
+    <CreateAccount v-if="this.$store.state.loginFlow === 'create'"/>
+    <AccountType v-if="this.$store.state.loginFlow === 'type'"/>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
       alert("Login Pressed")
     },
     created () {
-      console.log("Store", store);
+      console.log("This", this);
     }
   }
 };

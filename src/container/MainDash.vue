@@ -243,6 +243,7 @@ export default {
     },
     methods: {
         created () {
+            console.log("This ", this);
             calculateTotals();
         },
         calculateTotals(){
