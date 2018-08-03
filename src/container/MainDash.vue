@@ -19,7 +19,7 @@
                         <img :src='item.image' class="product-image"/>
                         <h3>{{`${item.title} ${index + 1}`}}</h3>
                         <p>{{`$${item.price}.00`}}</p>
-                        <el-button type="text" class="select-product-button" @click="selectProduct(item, index)">Select</el-button>
+                        <el-button type="text" class="select-product-button" @click="checkoutItems.push(item);">Select</el-button>
                     </el-card>
                 </div>
             </div>
@@ -48,13 +48,21 @@
                              <el-input-number v-model="activeItemQuantity" class="input-amount" size="mini" :min="1" :max="10"></el-input-number>
                         </div>
                         <p>{{`$${item.price}.00`}}</p>
-                        <i @click="removeFromCheckout(item, index)" style="padding-left: 3%" class="el-icon-delete"></i>
+                        <i @click="checkoutItems.splice(index, 1)" style="padding-left: 3%" class="el-icon-delete"></i>
+                    </div>
+                    <div class="check-out-controls">
+                        <p>Subtotal - $206.00</p>
+                        <p>Tax - $10.00</p>
+                        <p>Total - $216.00</p>
+                        <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button>
+                        <el-button @click="showPaymentTypeModal = true" class="checkout-button full-button">Select Payment Method</el-button>
                     </div>
                 </div>
             </div>
 
+            <!-- Dialogue Box for the user to add a product -->
             <el-dialog
-                :modalAppendToBody="true"
+                :modalAppendToBody="false"
                 title="Select Category"
                 :visible.sync="dialogVisible"
                 width="30%">
@@ -65,6 +73,31 @@
                 </span>
             </el-dialog>
 
+            <!-- Dialogue Box for Adding a Discount -->
+            <el-dialog 
+                :modalAppendToBody="false"
+                title="Select Discount Amount"
+                :visible.sync="showDiscountModal"
+                width="30%">
+                <h4>Testing the Discount Dialogue Box</h4>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="showDiscountModal = false">Cancel</el-button>
+                    <el-button type="primary" @click="showDiscountModal = false">Confirm</el-button>
+                </span>
+            </el-dialog>
+
+            <!-- Dialogue Box to Select Payment Method -->
+             <el-dialog 
+                :modalAppendToBody="false"
+                title="Select Payment Method"
+                :visible.sync="showPaymentTypeModal"
+                width="30%">
+                <h4>Testing the Select Payment methods modal</h4>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="dialogVisible = false">Cancel</el-button>
+                    <el-button type="primary" @click="showPaymentTypeModal = false">Confirm</el-button>
+                </span>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -78,6 +111,8 @@ export default {
         return {
             addingProduct: false,
             dialogVisible: false,
+            showDiscountModal: false,
+            showPaymentTypeModal: false,
             products:[
                 {
                     image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
@@ -112,17 +147,17 @@ export default {
                 }
             ],
             checkoutItems: [
-                //  {
-                //     image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
-                //     title: 'Product',
-                //     price: 45,
-                //     quantity: 1
-                // },{
-                //     image: 'https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80',
-                //     title: 'Product',
-                //     price: 35,
-                //     quantity: 1
-                // },
+                 {
+                    image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
+                    title: 'Product',
+                    price: 45,
+                    quantity: 1
+                },{
+                    image: 'https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80',
+                    title: 'Product',
+                    price: 35,
+                    quantity: 1
+                },
             ],
             activeItemQuantity: 0,
         }
@@ -132,14 +167,8 @@ export default {
         Button
     },
     methods: {
-        addProduct(){
+        calculateTotals(){
 
-        },
-        selectProduct(item, index){
-            this.checkoutItems.push(item);
-        },
-        removeFromCheckout(item, index){
-            this.checkoutItems.splice(index, 1);
         }
     }
 }
@@ -265,11 +294,22 @@ el-dialog {
     align-items: center;
 
 }
+.check-out-controls {
+    display: flex;
+    flex-direction: column;
+     width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+.check-out-controls p {
+    margin: 2% 0 0 0;
+}
 .list-item {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-content: center;
     align-items: center;
     height: 20%;
     border-bottom: 1px solid lightgrey;
@@ -297,5 +337,12 @@ el-dialog {
 }
 .select-product-button {
     color: #6532bd;
+}
+.checkout-button{
+    width: 95%;
+    height: 20%;
+    margin: 5px 0 5px 0;
+    justify-content: center;
+    align-content: center;
 }
 </style>
