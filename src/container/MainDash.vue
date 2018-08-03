@@ -38,13 +38,13 @@
             <div class="checkout">
                 <h4>Current Checkout</h4>
                 <!-- Empty list of items -->
-                <div v-if="checkoutItems.length == 0" class="empty-product-list">
+                <div v-if="checkoutItems.length == 0 && selectedCoin == ''" class="empty-product-list">
                     <h4>No Product Selected</h4>
                     <h4>Please select from product list</h4>
                 </div>
 
                 <!-- Populated List of Items -->
-                <div v-if="checkoutItems.length > 0" class="populated-product-list">
+                <div v-if="checkoutItems.length > 0 && selectedCoin == ''" class="populated-product-list">
                    <div v-for="(item, index) in checkoutItems" :key="index" class="list-item">
                         <img class="checkout-list-image" :src="item.image"/>
                         <div class="quantity-current-checkout">
@@ -62,6 +62,13 @@
                         <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button>
                         <el-button @click="showPaymentTypeModal = true" class="checkout-button full-button">Select Payment Method</el-button>
                     </div>
+                </div>
+
+                 <!-- If a coin has already been selected -->
+
+                <div class="payment-modal" v-if="selectedCoin !== ''">
+                    <img src="../assets/QR_code.png"/>
+                    <h4>Show your customer the QR Code so they can pay with their phone</h4>
                 </div>
             </div>
 
@@ -108,7 +115,7 @@
                 </div>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="dialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="showPaymentTypeModal = false">Confirm</el-button>
+                    <el-button type="primary" @click="handleSelectCrypto">Confirm</el-button>
                 </span>
             </el-dialog>
         </div>
@@ -117,6 +124,7 @@
 <script>
 import MainHeader from '../components/MainHeader';
 import Button from '../components/Button';
+import store from '../../mockStore.js';
 // Off White background color - F5F9FB
 export default {
     name: 'mainDash',
@@ -222,6 +230,10 @@ export default {
             this.tax = (total * 0.029).toFixed(2);
             this.subtotal = total;
             this.total = total + tax;
+        },
+        handleSelectCrypto(){
+            store.commit('setCoinType', this.selectedCoin);
+            this.showPaymentTypeModal = false
         }
     }
 }
@@ -458,6 +470,18 @@ el-dialog {
 
 .payment-modal {
     border-radius: 25px;
+}
+.payment-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 100%;
+    justify-content: space-around;
+}
+.payment-modal h4 {
+    text-align: center;
+    width: 80%;
 }
 
 </style>
