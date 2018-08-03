@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import Vuex from 'vuex';
+import store from '../mockStore.js';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(Element);
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store: store,
   template: '<App/>',
   components: { App }
 })

@@ -20,9 +20,7 @@
      </el-col>
      <el-col>
        <el-row type="flex"  align="bottom" justify="center">
-        <router-link :to="{path: '/home'}">
-            <Button v-on:click="login" text="Sign Up"/>
-        </router-link>
+           <el-button class="circle-button" @click="handleNext">Sign Up</el-button>
        </el-row>
      </el-col>
     <el-col>
@@ -35,12 +33,10 @@
 </template>
 <script>
 import Button from './Button.vue';
+import store from '../../mockStore.js';
 
 export default {
 name: 'CreateAccount',
-// computed: {
-//     ...mapState(['login'])
-// },
 data() {
     return {
       msg: "Welcome",
@@ -57,7 +53,10 @@ data() {
   methods: {
     // ...mapMutations(['SET_LOGIN']),
       handleLogin(){
-          alert("Testing Handle Login")
+          store.commit('adjustLoginFlow', 'signin');
+      },
+      handleNext(){
+          store.commit('adjustLoginFlow', 'type');
       }
   }
 };
@@ -94,5 +93,13 @@ a {
 }
 .top {
   padding-bottom: 15vh;
+}
+.circle-button {
+    background-color: #6532bd;
+    color: white;
+    border-radius: 18;
+    font-size: 20px;
+    height: 20%;
+    width: 50%;
 }
 </style>
