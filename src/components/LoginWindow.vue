@@ -31,6 +31,7 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 import Button from './Button.vue';
+import store from '../../mockStore.js';
 
 export default {
   name: 'LoginWindow',
@@ -46,8 +47,10 @@ export default {
     Button,
   },
   methods: {
+    ...mapState,
     handleStart: () => {
-     this.setLogin(true);
+      console.log("Store", store);
+     store.commit('adjustLoginFlow', 'create');
     }
   }
 };
