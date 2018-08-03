@@ -21,7 +21,7 @@
                             <span>{{`${item.title} ${index + 1}`}}</span>
                             <div class="bottom clearfix">
                                 <span>Price</span>
-                                <el-button type="text" class="select-product-button" @click="checkoutItems.push(item);">Select</el-button>
+                                <el-button type="text" class="select-product-button" @click="checkoutItems.push(item) && calculateTotals()">Select</el-button>
                             </div>
                         </div>
                     </el-card>
@@ -52,12 +52,13 @@
                              <el-input-number v-model="activeItemQuantity" class="input-amount" size="mini" :min="1" :max="10"></el-input-number>
                         </div>
                         <p>{{`$${item.price}.00`}}</p>
-                        <i @click="checkoutItems.splice(index, 1)" style="padding-left: 3%" class="el-icon-delete"></i>
+                        <i @click="checkoutItems.splice(index, 1) && calculateTotals()" style="padding-left: 3%" class="el-icon-delete"></i>
                     </div>
                     <div class="check-out-controls">
-                        <p>Subtotal - $206.00</p>
-                        <p>Tax - $10.00</p>
-                        <p>Total - $216.00</p>
+                        <p>{{`Subtotal - $${subtotal}.00`}}</p>
+                        <p>{{`Tax - $${tax}`}}</p>
+                        <p v-if="discount !== 0">{{`Discount - $${discount}`}}</p>
+                        <p>{{`Total - $${parseFloat(subtotal) + parseFloat(tax) - parseFloat(discount)}`}}</p>
                         <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button>
                         <el-button @click="showPaymentTypeModal = true" class="checkout-button full-button">Select Payment Method</el-button>
                     </div>
@@ -83,7 +84,8 @@
                 title="Select Discount Amount"
                 :visible.sync="showDiscountModal"
                 width="30%">
-                <h4>Testing the Discount Dialogue Box</h4>
+                <p style="text-align: center">Please specify your discount in dollar amounts</p>
+               <el-input placeholder="$15" v-model="discount"/>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="showDiscountModal = false">Cancel</el-button>
                     <el-button type="primary" @click="showDiscountModal = false">Confirm</el-button>
@@ -216,19 +218,23 @@ export default {
                 }
             ],
             checkoutItems: [
-                 {
-                    image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
-                    title: 'Product',
-                    price: 45,
-                    quantity: 1
-                },{
-                    image: 'https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80',
-                    title: 'Product',
-                    price: 35,
-                    quantity: 1
-                },
+                //  {
+                //     image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
+                //     title: 'Product',
+                //     price: 45,
+                //     quantity: 1
+                // },{
+                //     image: 'https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80',
+                //     title: 'Product',
+                //     price: 35,
+                //     quantity: 1
+                // },
             ],
             activeItemQuantity: 0,
+            subtotal: 0,
+            tax: 0,
+            total: 0,
+            discount: 0, // as a dollar amount
         }
     },
     components: {
@@ -236,8 +242,16 @@ export default {
         Button
     },
     methods: {
+        created () {
+            calculateTotals();
+        },
         calculateTotals(){
-
+            const total = this.checkoutItems.reduce((accum, val) => {
+                return val.price + accum;
+            }, 0);
+            this.tax = (total * 0.029).toFixed(2);
+            this.subtotal = total;
+            this.total = total + tax;
         }
     }
 }
@@ -318,7 +332,7 @@ h4 {
     align-content: center;
     background-color: #ffffff;
     height: 95%;
-    width: 22%;
+    width:35%;
     margin-right: 4%;
     box-shadow: 0px 5px 25px 0px #C9C9C9;
 }
@@ -365,10 +379,10 @@ el-dialog {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border: 1px solid black;
     height: 100%;
-    width: 75%;
-    margin: 0
+    width: 65%;
+    margin: 0;
+    padding-left: 1%;
 }
 .quantity-current-checkout{
     width: 40%;
