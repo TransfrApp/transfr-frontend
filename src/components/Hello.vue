@@ -38,9 +38,6 @@ export default {
     AccountType
   },
   methods: {
-    // ...mapMutations({
-    //    SET_LOGIN: 'setLogin',
-    // }),
     login() {
       alert("Login Pressed")
     },

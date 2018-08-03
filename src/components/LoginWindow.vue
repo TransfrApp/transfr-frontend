@@ -46,7 +46,6 @@ export default {
     Button,
   },
   methods: {
-     ...mapMutations(['SET_LOGIN']),
     handleStart: () => {
      this.setLogin(true);
     }

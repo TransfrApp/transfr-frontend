@@ -43,6 +43,11 @@ export default {
     },
     components: {
         MainHeader,
+    },
+    methods: {
+        addProd(){
+           this.addProduct = true;
+        }
     }
 }
 </script>
@@ -110,5 +115,19 @@ h4 {
     justify-content: center;
     text-align: center;
     padding-top: 20vh;
+}
+.input {
+    padding-bottom: 5vh;
+    width: 15rem;
+}
+.inputWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 450px;
+    width: 450px;
+    background-color: #ffffff;
 }
 </style>
