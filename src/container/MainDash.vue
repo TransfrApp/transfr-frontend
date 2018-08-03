@@ -66,7 +66,7 @@
 
                  <!-- If a coin has already been selected -->
 
-                <div class="payment-modal" v-if="selectedCoin !== ''">
+                <div class="payment-window" v-if="selectedCoin !== ''">
                     <img src="../assets/QR_code.png"/>
                     <h4>Show your customer the QR Code so they can pay with their phone</h4>
                 </div>
@@ -471,7 +471,7 @@ el-dialog {
 .payment-modal {
     border-radius: 25px;
 }
-.payment-modal {
+.payment-window {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -479,7 +479,7 @@ el-dialog {
     width: 100%;
     justify-content: space-around;
 }
-.payment-modal h4 {
+.payment-window h4 {
     text-align: center;
     width: 80%;
 }
