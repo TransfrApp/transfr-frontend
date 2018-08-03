@@ -89,10 +89,13 @@
             <!-- Dialogue Box to Select Payment Method -->
              <el-dialog 
                 :modalAppendToBody="false"
-                title="Select Payment Method"
+                title="Pay With"
                 :visible.sync="showPaymentTypeModal"
                 width="30%">
-                <h4>Testing the Select Payment methods modal</h4>
+                <div class="crypto-payment-square" v-for="coin in coins">
+                    <img :src="coin.imageUrl" class="crypto-icon" />
+                    <span class="crypto-icon-subtext">{{coin.name}}</span>
+                </div>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="dialogVisible = false">Cancel</el-button>
                     <el-button type="primary" @click="showPaymentTypeModal = false">Confirm</el-button>
@@ -113,6 +116,68 @@ export default {
             dialogVisible: false,
             showDiscountModal: false,
             showPaymentTypeModal: false,
+            coins: [
+                {
+                   name: "Bitcoin",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/btc.png",
+                },
+                {
+                   name: "Dash",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/dash.png",
+                },
+                {
+                   name: "Vechain",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/ven.png",
+                },
+                {
+                   name: "Tether",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/usdt.png",
+                },
+                {
+                   name: "Ethereum",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/eth.png",
+                },
+                {
+                   name: "Lisk",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/lsk.png",
+                },
+                {
+                   name: "Neo",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/neo.png",
+                },
+                {
+                   name: "Eos",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/eos.png",
+                },
+                {
+                   name: "Siacoin",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/sc.png",
+                },
+                {
+                   name: "Qtum",
+                   imageUrl: "https://raw.githubusercontent.com/dziungles/cryptocurrency-logos/master/coins/32x32/qtum.png",
+                },
+                {
+                   name: "Zcash",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/zec.png",
+                },
+                {
+                   name: "Digixdao",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/dgd.png",
+                },
+                {
+                   name: "Steem",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/steem.png",
+                },
+                {
+                   name: "Rchain",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/rhoc.png",
+                },
+                {
+                   name: "Waves",
+                   imageUrl: "https://raw.githubusercontent.com/atomiclabs/cryptocurrency-icons/master/32/icon/waves.png",
+                },
+            ],
             products:[
                 {
                     image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
@@ -344,5 +409,23 @@ el-dialog {
     margin: 5px 0 5px 0;
     justify-content: center;
     align-content: center;
+}
+.crypto-payment-square {
+    height: 5rem;
+    width: 5rem;
+    border: 1px solid gray;
+    border-radius: 15px;
+    display: inline-block;
+    max-width: 25%;
+    text-align: center;
+    margin: 5px;
+}
+
+.crypto-icon {
+    margin-top: 20%;
+}
+
+.crypto-icon-subtext {
+    display: block;
 }
 </style>
