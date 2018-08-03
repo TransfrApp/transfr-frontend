@@ -15,11 +15,15 @@
             <div v-if="products.length > 0" class="product-list-view">
                 <h4>All Products</h4>
                 <div class="card-container">
-                    <el-card v-for="(item, index) in products" :key="index" class="product-card">
-                        <img :src='item.image' class="product-image"/>
-                        <h3>{{`${item.title} ${index + 1}`}}</h3>
-                        <p>{{`$${item.price}.00`}}</p>
-                        <el-button type="text" class="select-product-button" @click="checkoutItems.push(item);">Select</el-button>
+                    <el-card v-for="(item, index) in products" :key="index" class="product-card" :body-style="{ padding: '0px' }">
+                        <img src='http://salemdigest.com/wp-content/uploads/2016/08/TITS_food1.jpg' class="product-image"/>
+                        <div style="padding: 14px;">
+                            <span>{{`${item.title} ${index + 1}`}}</span>
+                            <div class="bottom clearfix">
+                                <span>Price</span>
+                                <el-button type="text" class="select-product-button" @click="checkoutItems.push(item);">Select</el-button>
+                            </div>
+                        </div>
                     </el-card>
                 </div>
             </div>
@@ -239,6 +243,20 @@ export default {
 }
 </script>
 <style>
+      .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  
+  .clearfix:after {
+      clear: both
+  }
 .main {
     display: flex;
     flex-direction: row;
@@ -389,16 +407,14 @@ el-dialog {
     display: flex;
     text-align: center;
     flex-direction: column;
-    margin: 5px;
-    width: 22%;
+    margin: 1%;
+    width: 16%;
     justify-content: center;
     align-content: center;
     align-items: center;
 }
 .product-image {
-    height: 100px;
-    width: 100px;
-    justify-content: center;
+    width: 100%
 }
 .select-product-button {
     color: #6532bd;
