@@ -53,6 +53,12 @@ header {
 
     #add-item-button {
         border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        height: 75%;
     }
 }
 .left {

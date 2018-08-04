@@ -40,7 +40,7 @@
             <div class="checkout">
                 <h4>Current Checkout</h4>
                 <!-- Empty list of items -->
-                <div v-if="checkoutItems.length == 0 && selectedCoin == ''" class="empty-product-list">
+                <div v-if="checkoutItems.length == 0 && selectedCoin == '' && completedTransaction !== true" class="empty-product-list">
                     <h4>No Product Selected</h4>
                     <h4>Please select from product list</h4>
                 </div>
@@ -66,9 +66,25 @@
                     </div>
                 </div>
 
+                <div v-if="completedTransaction == true" class="completed-payment">
+                   <div class="header-section">
+                        <h2>Great Success!</h2>
+                        <h3>The transaction went through without a hitch</h3>
+                   </div>
+                    <p>{{`Subtotal - $${subtotal}.00`}}</p>
+                    <p>{{`Tax - $${tax}`}}</p>
+                    <p v-if="discount !== 0">{{`Discount - $${discount}`}}</p>
+                    <p>{{`Total - $${parseFloat(subtotal) + parseFloat(tax) - parseFloat(discount)}`}}</p>
+                    <div class="button-section">
+                        <el-button>Cancel Transaction</el-button>
+                        <el-button @click="newTransaction">Start New Transaction</el-button>
+                    </div>
+
+                </div>
+
                  <!-- If a coin has already been selected -->
 
-                <div class="payment-window" v-if="selectedCoin !== ''">
+                <div class="payment-window" v-if="selectedCoin !== '' && completedTransaction !== true">
                     <img src="../assets/QR_code.png"/>
                     <h4>Show your customer the QR Code so they can pay with their phone</h4>
                 </div>
@@ -214,6 +230,7 @@ export default {
             tax: 0,
             total: 0,
             discount: 0, // as a dollar amount
+            completedTransaction: false // default is false
         }
     },
     components: {
@@ -235,12 +252,29 @@ export default {
         },
         handleSelectCrypto(){
             store.commit('setCoinType', this.selectedCoin);
-            this.showPaymentTypeModal = false
+            this.showPaymentTypeModal = false;
+             setTimeout(this.completedTransaction = true, 5000);
+             setTimeout(() => {
+                this.checkoutItems = [];
+                this.selectedCoin = '';
+                this.total = 0;
+                this.tax = 0;
+                this.discount = 0;
+                this.completedTransaction = false;
+             }, 30000);
+        },
+        newTransaction(){
+            this.checkoutItems = [];
+            this.selectedCoin = '';
+            this.total = 0;
+            this.tax = 0;
+            this.discount = 0;
+            this.completedTransaction = false;
         }
     }
 }
 </script>
-<style>
+<style scoped>
       .bottom {
     margin-top: 13px;
     line-height: 12px;
@@ -485,5 +519,15 @@ el-dialog {
     text-align: center;
     width: 80%;
 }
-
+.completed-payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 60%
+}
+.completed-payment .header-section {
+    width: 80%;
+}
 </style>
