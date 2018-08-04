@@ -10,10 +10,9 @@ const store = new Vuex.Store({
         coinType: '',
     },
     mutations: {
-        increment (state) {
-            state.count++
-        },
-        adjustLoginFlow(state, type){state.loginFlow = type},
+        increment (state) {state.count++},
+        adjustLoginFlow (state, type) {state.loginFlow = type},
+        setCoinType (state, payload) {state.coinType = payload},
     }
 })
 

@@ -1,7 +1,7 @@
 <template>
     <div class="window">
       <h1 class="center">{{ msg }}</h1>
-     <el-col :span="24">
+     <el-col class="input-form" :span="24">
         <el-row type="flex" justify="center">
           <el-input class="input" v-model="username" placeholder="Username"/>
         </el-row>
@@ -13,14 +13,14 @@
           <p class="hotlink">Reset</p>
         </el-row>
      </el-col>
-     <el-col>
-       <el-row type="flex"  align="bottom" justify="center">
+     <el-col class="login-section">
+       <el-row type="flex"  align="center" justify="center">
        <router-link :to="{path: '/home'}">
           <Button v-on:click="login" text="Log In"/>
        </router-link>
        </el-row>
      </el-col>
-    <el-col>
+    <el-col class="login-section">
       <el-row align="center" type="flex" justify="center">
         <p class="text">No Account?</p>
         <a @click="handleStart"><p class="hotlink">Get Started</p></a>
@@ -57,15 +57,18 @@ export default {
 </script>
 <style scoped>
 .window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #ffffff;
   margin-top: 15vh;
   margin-left: 20vw;
   width: 60vw;
-  height: 60vh;
+  height: 50vh;
   border-radius: 37px;
 }
 .input-form {
-  margin-top: 10vh;
   justify-content: center;
 }
 .input {
@@ -86,7 +89,7 @@ export default {
   padding-left: 5px;
 }
 .top {
-  padding-bottom: 15vh;
+  padding-bottom: 3%;
 }
 .route-link {
   text-decoration: none;
