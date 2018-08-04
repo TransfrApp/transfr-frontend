@@ -17,10 +17,12 @@
                 <div class="card-container">
                     <el-card v-for="(item, index) in products" :key="index" class="product-card" :body-style="{ padding: '0px' }">
                         <img src='http://salemdigest.com/wp-content/uploads/2016/08/TITS_food1.jpg' class="product-image"/>
-                        <div style="padding: 14px;">
+                        <div style="padding: 7px;">
                             <span>{{`${item.title} ${index + 1}`}}</span>
                             <div class="bottom clearfix">
-                                <span>Price</span>
+                                <span style="color: gray">Description</span>
+                                <br/>
+                                <span>${{item.price}}</span>
                                 <el-button type="text" class="select-product-button" @click="checkoutItems.push(item) && calculateTotals()">Select</el-button>
                             </div>
                         </div>
@@ -313,8 +315,8 @@ h4 {
     align-items: center;
     align-content: center;
     background-color: #ffffff;
-    height: 95%;
-    width:35%;
+    height: 85vh;
+    width: 40vh;
     margin-right: 4%;
     box-shadow: 0px 5px 25px 0px #C9C9C9;
 }
@@ -405,7 +407,7 @@ el-dialog {
     text-align: center;
     flex-direction: column;
     margin: 1%;
-    width: 14%;
+    width: 22%;
     justify-content: center;
     align-content: center;
     align-items: center;
