@@ -61,7 +61,7 @@
                         <p>{{`Tax - $${tax}`}}</p>
                         <p v-if="discount !== 0">{{`Discount - $${discount}`}}</p>
                         <p>{{`Total - $${parseFloat(subtotal) + parseFloat(tax) - parseFloat(discount)}`}}</p>
-                        <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button>
+                        <!-- <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button> -->
                         <el-button @click="showPaymentTypeModal = true" class="checkout-button full-button">Select Payment Method</el-button>
                     </div>
                 </div>
@@ -239,7 +239,6 @@ export default {
     },
     methods: {
         created () {
-            console.log("This ", this);
             calculateTotals();
         },
         calculateTotals(){
@@ -459,6 +458,10 @@ el-dialog {
     width: 95%;
     height: 20%;
     margin: 5px 0 5px 0;
+    background: #6532bd;
+    color: white;
+    border-radius: 8px;
+    margin-top: 10%;
     justify-content: center;
     align-content: center;
 }
@@ -485,6 +488,7 @@ el-dialog {
 .select-coin-radio-button {
     margin-left: auto;
 }
+
 .el-radio__label {
     display: none;
 }
