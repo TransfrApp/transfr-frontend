@@ -53,8 +53,8 @@
                             <p>{{item.title}}</p>
                              <el-input-number v-model="activeItemQuantity" class="input-amount" size="mini" :min="1" :max="10"></el-input-number>
                         </div>
-                        <p>{{`$${item.price}.00`}}</p>
-                        <i @click="checkoutItems.splice(index, 1) && calculateTotals()" style="padding-left: 3%" class="el-icon-delete"></i>
+                        <p class="checkout-item-price">{{`$${item.price}.00`}}</p>
+                        <i @click="checkoutItems.splice(index, 1) && calculateTotals()" style="padding-left: 3%; margin-top: 5vh;" class="el-icon-delete"></i>
                     </div>
                     <div class="check-out-controls">
                         <p>{{`Subtotal - $${subtotal}.00`}}</p>
@@ -362,9 +362,10 @@ h4 {
     padding-top: 20vh;
 }
 .checkout-list-image {
-    height: 10%;
-    width: 15%;
+    height: 50px;
+    width: 50px;
     margin-right: 3%;
+    object-fit: cover;
 }
 .input-amount {
     width: 90%;
@@ -460,6 +461,9 @@ el-dialog {
     margin: 5px 0 5px 0;
     justify-content: center;
     align-content: center;
+}
+.checkout-item-price {
+    margin-top: 7vh;
 }
 .crypto-payment-square {
     height: 2rem;
