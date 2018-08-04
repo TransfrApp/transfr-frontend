@@ -132,8 +132,8 @@
                     </el-radio-group>
                 </div>
                 <span slot="footer" class="dialog-footer">
-                    <el-button @click="dialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="handleSelectCrypto">Confirm</el-button>
+                    <!-- <el-button @click="dialogVisible = false">Cancel</el-button> -->
+                    <el-button type="primary" class="show-qr-code-button" @click="handleSelectCrypto">Show QR Code</el-button>
                 </span>
             </el-dialog>
         </div>
@@ -247,7 +247,7 @@ export default {
             }, 0);
             this.tax = (total * 0.029).toFixed(2);
             this.subtotal = total;
-            this.total = total + tax;
+            this.total = total + this.tax;
         },
         handleSelectCrypto(){
             store.commit('setCoinType', this.selectedCoin);
@@ -275,8 +275,8 @@ export default {
     }
 }
 </script>
-<style scoped>
-      .bottom {
+<style>
+    .bottom {
     margin-top: 13px;
     line-height: 12px;
   }
@@ -528,6 +528,17 @@ el-dialog {
 .payment-window h4 {
     text-align: center;
     width: 80%;
+}
+
+.payment-modal .el-dialog__footer {
+    text-align: center;
+}
+.show-qr-code-button {
+    color: #fff;
+    width: 60%;
+    background-color: #6532bd;
+    border-color: #6532bd;
+    border-radius: 8px;
 }
 .completed-payment {
     display: flex;
