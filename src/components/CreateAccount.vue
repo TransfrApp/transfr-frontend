@@ -32,37 +32,44 @@
    </div>
 </template>
 <script>
-import Button from './Button.vue';
-import store from '../../mockStore.js';
+import Button from "./Button.vue";
+import store from "../../mockStore.js";
 
 export default {
-name: 'CreateAccount',
-data() {
+  name: "CreateAccount",
+  data() {
     return {
       msg: "Welcome",
-      businessName: '',
-      username: '',
-      email: '',
-      confirmPassword: '',
-
+      businessName: "",
+      username: "",
+      email: "",
+      confirmPassword: ""
     };
   },
   components: {
-    Button,
+    Button
   },
   methods: {
     // ...mapMutations(['SET_LOGIN']),
-      handleLogin(){
-          store.commit('adjustLoginFlow', 'signin');
-      },
-      handleNext(){
-          store.commit('adjustLoginFlow', 'type');
-      }
+    handleLogin() {
+      store.commit("adjustLoginFlow", "signin");
+    },
+    handleNext() {
+      store.commit("adjustLoginFlow", "type");
+    }
   }
 };
 </script>
 <style scoped>
+.center {
+    font-size: 2rem;
+    margin: 0;
+}
 .window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #ffffff;
   margin-top: 15vh;
   margin-left: 20vw;
@@ -71,16 +78,16 @@ data() {
   border-radius: 37px;
 }
 .input-form {
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
   justify-content: center;
 }
 .input {
-  width: 295px;
-  height: 66px;
+  width: 75%;
+  height: 10%;
   border-color: transparent;
   background-color: #ffffff;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 .input::placeholder {
   color: grey;
@@ -95,11 +102,11 @@ a {
   padding-bottom: 15vh;
 }
 .circle-button {
-    background-color: #6532bd;
-    color: white;
-    border-radius: 18;
-    font-size: 20px;
-    height: 20%;
-    width: 50%;
+  background-color: #6532bd;
+  color: white;
+  border-radius: 18;
+  font-size: 20px;
+  height: 20%;
+  width: 50%;
 }
 </style>

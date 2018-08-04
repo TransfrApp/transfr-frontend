@@ -6,7 +6,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         count: 0,
-        loginFlow: 'signin', // can be 'sigin', 'create', 'type,
+        loginFlow: 'create', // can be 'sigin', 'create', 'type,
         coinType: '',
     },
     mutations: {
