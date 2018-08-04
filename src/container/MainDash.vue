@@ -253,7 +253,9 @@ export default {
         handleSelectCrypto(){
             store.commit('setCoinType', this.selectedCoin);
             this.showPaymentTypeModal = false;
-             setTimeout(this.completedTransaction = true, 5000);
+             setTimeout(() => {
+                this.completedTransaction = true
+             }, 5000);
              setTimeout(() => {
                 this.checkoutItems = [];
                 this.selectedCoin = '';
