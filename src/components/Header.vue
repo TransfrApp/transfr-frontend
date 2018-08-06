@@ -4,7 +4,10 @@
           <img src="../assets/arrow-left.png"/>
         </span>
         <span class="title">{{title}}</span>
-        <span class="right">{{rightIcon}}</span>
+        <span class="right">
+          <!-- Need to figure out what to put here -->
+          <img/>
+        </span>
     </header>
 </template>
 
@@ -26,17 +29,18 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 header {
-  margin: 0 !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   height: 75px;
   width: 100vw;
-  padding: 0 16px 0 24px;
+  /* padding: 0 16px 0 24px; */
   background-color: transparent;
   color: #ffffff;
-  display: inline-flex;
   justify-content: space-between;
-  align-content: center;   
+  overflow: hidden;
 }
 
 header span {
@@ -54,9 +58,13 @@ header span {
   font-family: Helvetica, Arial, sans-serif
 }
 .left {
-    padding-left: 10px;
+    padding-left: 20px;
 }
 .right {
-    padding-right: 10px;
+    padding-right: 20px;
+}
+.right img {
+  color: #6532bd;
+  width: 30px; /* This is a hacky placeholder to center the title until I find a better solution*/
 }
 </style>

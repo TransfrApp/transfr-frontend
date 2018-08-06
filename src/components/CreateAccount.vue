@@ -118,5 +118,6 @@ a {
 }
 .text {
   font-size: 20px;
+  font-weight: 300;
 }
 </style>

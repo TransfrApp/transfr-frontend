@@ -27,22 +27,24 @@
    </div>
 </template>
 <script>
-import Button from './Button.vue';
+import Button from "./Button.vue";
 
 export default {
-    data() {
-        return {
-            msg: 'Select Account Type',
-            type: '',
-        }
-    },
-    components: {
-        Button,
-    }
-}
+  data() {
+    return {
+      msg: "Select Account Type",
+      type: ""
+    };
+  },
+  components: {
+    Button
+  }
+};
 </script>
 <style scoped>
 .window {
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
   margin-top: 15vh;
   margin-left: 20vw;
@@ -62,8 +64,7 @@ export default {
   text-decoration: none;
 }
 .radio-container {
-    margin-top: 12vh;
+  margin-top: 12vh;
 }
-
 </style>
 

@@ -101,6 +101,7 @@ h1 {
 }
 .text {
   font-size: 20px;
+  font-weight: 300;
 }
 .title {
   color: #202447;
