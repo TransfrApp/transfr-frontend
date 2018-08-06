@@ -1,7 +1,7 @@
 <template>
     <header>
         <span class="left">
-            <i class="el-icon-menu"></i>
+           <font-awesome-icon class="fa fa-bars"></font-awesome-icon>
         </span>
         <span>
             <el-input placeholder="Please input" v-model="searchBar" class="input-with-select">
@@ -15,17 +15,22 @@
         </span>
         <span id="add-button-span" class="right">
             <el-button id="add-item-button" icon="el-icon-plus">
-                <span>Add Item</span>
+                <span>Add Product</span>
             </el-button>
         </span>
     </header>
 </template>
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+
 export default {
     data() {
         return {
             searchBar:''
         }
+    },
+    components: {
+        FontAwesomeIcon,
     }
 }
 </script>
@@ -59,6 +64,10 @@ header {
         align-content: center;
         align-items: center;
         height: 75%;
+
+        span {
+            font-size: 16px;
+        }
     }
 }
 .left {

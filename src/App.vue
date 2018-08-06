@@ -23,5 +23,6 @@ body {
   color: #2c3e50;
   display: flex;
   flex: 1;
+  background-color: #f5f9fb;
 }
 </style>

@@ -51,9 +51,10 @@ export default {
 <style>
 .hello {
   flex: 1;
-  height: 110vh;
+  height: 100vh;
   background-color: #6532bd;
   justify-content: center;
+  overflow: hidden;
 }
 .center {
   padding-top: 5vh;
