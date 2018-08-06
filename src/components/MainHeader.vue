@@ -4,7 +4,7 @@
            <font-awesome-icon class="fa fa-bars"></font-awesome-icon>
         </span>
         <span>
-            <el-input placeholder="Please input" v-model="searchBar" class="input-with-select">
+            <el-input placeholder="Search Products" v-model="searchBar" class="input-with-select">
                 <el-select aria-placeholder="Categories" v-model="select" slot="prepend">
                     <el-option label="Restaurant" value="1"></el-option>
                     <el-option label="Order No." value="2"></el-option>
@@ -64,9 +64,11 @@ header {
         align-content: center;
         align-items: center;
         height: 75%;
-
+        color: #6532bd;
+        background: linear-gradient(to left, rgba(255,255,255, 1), rgba(255,255,255, .7));
         span {
             font-size: 16px;
+            color: #6532bd;
         }
     }
 }

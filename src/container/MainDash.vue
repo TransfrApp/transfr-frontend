@@ -61,7 +61,7 @@
                         <p>{{`Tax - $${tax}`}}</p>
                         <p v-if="discount !== 0">{{`Discount - $${discount}`}}</p>
                         <p>{{`Total - $${parseFloat(subtotal) + parseFloat(tax) - parseFloat(discount)}`}}</p>
-                        <!-- <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button> -->
+                        <el-button @click="showDiscountModal = true" class="checkout-button ghost-button">Discount</el-button>
                         <el-button @click="showPaymentTypeModal = true" class="checkout-button full-button">Select Payment Method</el-button>
                     </div>
                 </div>
@@ -69,15 +69,15 @@
                 <div v-if="completedTransaction == true" class="completed-payment">
                    <div class="header-section">
                         <h2>Great Success!</h2>
-                        <h3>The transaction went through without a hitch</h3>
+                        <h3 style="font-weight: 300">The transaction went through without a hitch</h3>
                    </div>
                     <p>{{`Subtotal - $${subtotal}.00`}}</p>
                     <p>{{`Tax - $${tax}`}}</p>
                     <p v-if="discount !== 0">{{`Discount - $${discount}`}}</p>
                     <p>{{`Total - $${parseFloat(subtotal) + parseFloat(tax) - parseFloat(discount)}`}}</p>
                     <div class="button-section">
-                        <el-button>Cancel Transaction</el-button>
-                        <el-button @click="newTransaction">Start New Transaction</el-button>
+                        <el-button class="checkout-button ghost-button">Cancel Transaction</el-button>
+                        <el-button class="checkout-button" @click="newTransaction">Start New Transaction</el-button>
                     </div>
 
                 </div>
@@ -123,7 +123,7 @@
                 title="Pay With"
                 custom-class="payment-modal"
                 :visible.sync="showPaymentTypeModal"
-                width="25%">
+                width="35%">
                 <div class="crypto-payment-square" v-for="coin in coins">
                     <img :src="coin.imageUrl" class="crypto-icon" />
                     <span class="crypto-icon-subtext">{{coin.name}}</span>
@@ -379,6 +379,12 @@ h4 {
   box-shadow: 0px 5px 25px 0px #c9c9c9;
   margin-bottom: 5%;
 }
+.checkout h4 {
+  font-size: 19px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #6d708a;
+  font-weight: 400;
+}
 .empty-product-list {
   justify-content: center;
   text-align: center;
@@ -396,6 +402,7 @@ h4 {
 }
 .populated-product-list {
   justify-content: flex-start;
+  overflow: scroll;
 }
 .input {
   padding-bottom: 5vh;
@@ -480,13 +487,25 @@ el-dialog {
 .checkout-button {
   width: 95%;
   height: 20%;
-  margin: 5px 0 5px 0;
-  background: #6532bd;
+  margin: 15px 0 15px 0;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Helvetica, Arial, sans-serif;
+  background: linear-gradient(to right, #6532bd, #7d3bb7);
+  border: 1px solid #6532bd;
   color: white;
   border-radius: 8px;
   margin-top: 10%;
   justify-content: center;
   align-content: center;
+  align-items: center;
+}
+.ghost-button {
+  background: #ffffff !important;
+  border: 1px solid #6532bd;
+  color: #6532bd;
+  margin-bottom: -5%;
+  margin-left: 5px;
 }
 .checkout-item-price {
   margin-top: 7vh;
