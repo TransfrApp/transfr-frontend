@@ -1,7 +1,9 @@
 <template>
     <header>
-        <span class="left">{{leftIcon}}</span>
-        <span>{{title}}</span>
+        <span class="left">
+          <img src="../assets/arrow-left.png"/>
+        </span>
+        <span class="title">{{title}}</span>
         <span class="right">{{rightIcon}}</span>
     </header>
 </template>
@@ -45,7 +47,11 @@ header span {
   letter-spacing: 0.02em;
   font-weight: 400;
   box-sizing: border-box;
-  padding-top: 16px;
+  padding-top: 3%;;
+}
+.title {
+  font-weight: 600;
+  font-family: Helvetica, Arial, sans-serif
 }
 .left {
     padding-left: 10px;

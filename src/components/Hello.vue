@@ -2,7 +2,7 @@
   <div class="hello">
     <Header v-if="this.$store.state.loginFlow === 'signin'" title="Sign In"/>
     <Header v-if="this.$store.state.loginFlow === 'create'" title="Create An Account"/>
-     <Header v-if="this.$store.state.loginFlow === 'type'" title="Account Set Up"/>
+    <Header v-if="this.$store.state.loginFlow === 'type'" title="Account Set Up"/>
     <LoginWindow v-if="this.$store.state.loginFlow === 'signin'"/>
     <CreateAccount v-if="this.$store.state.loginFlow === 'create'"/>
     <AccountType v-if="this.$store.state.loginFlow === 'type'"/>
@@ -52,7 +52,7 @@ export default {
 .hello {
   flex: 1;
   height: 100vh;
-  background-color: #6532bd;
+  background: linear-gradient(180deg, #6532bd 50%, #F5F9FB 50%);
   justify-content: center;
   overflow: hidden;
 }

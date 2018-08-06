@@ -1,6 +1,6 @@
 <template>
     <div class="window">
-      <h1 class="center">{{ msg }}</h1>
+      <h1 class="center title">{{ msg }}</h1>
      <el-col class="input-form" :span="24">
         <el-row type="flex" justify="center">
           <el-input class="input" v-model="username" placeholder="Username"/>
@@ -23,7 +23,7 @@
     <el-col class="login-section">
       <el-row align="center" type="flex" justify="center">
         <p class="text">No Account?</p>
-        <a @click="handleStart"><p class="hotlink">Get Started</p></a>
+        <a @click="handleStart"><p class="hotlink text">Get Started</p></a>
       </el-row>
     </el-col>
    </div>
@@ -56,6 +56,10 @@ export default {
 };
 </script>
 <style scoped>
+h1 {
+  font-weight: 400;
+  font-family: Helvetica, Arial, sans-serif
+}
 .window {
   display: flex;
   flex-direction: column;
@@ -65,7 +69,7 @@ export default {
   margin-top: 15vh;
   margin-left: 20vw;
   width: 60vw;
-  height: 50vh;
+  min-height: 50vh;
   border-radius: 37px;
 }
 .input-form {
@@ -74,8 +78,9 @@ export default {
 .input {
   width: 295px;
   height: 66px;
+  font-size: 20px;
   border-color: transparent;
-  background-color: #ffffff;
+  background-color: #FBFCFC;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -93,5 +98,11 @@ export default {
 }
 .route-link {
   text-decoration: none;
+}
+.text {
+  font-size: 20px;
+}
+.title {
+  color: #202447;
 }
 </style>

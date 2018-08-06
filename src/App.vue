@@ -25,4 +25,7 @@ body {
   flex: 1;
   background-color: #f5f9fb;
 }
+h1, h2, h3, h4, p {
+  font-family: Helvetica, Arial, sans-serif
+}
 </style>

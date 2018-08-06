@@ -93,10 +93,10 @@
             <!-- Dialogue Box for the user to add a product -->
             <el-dialog
                 :modalAppendToBody="false"
-                title="Select Category"
-                :visible.sync="dialogVisible"
+                title="Add a Product"
+                :visible.sync="addingProduct"
                 width="30%">
-                <span>This is a message</span>
+                <el-input placeholder="Product Name"/>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="dialogVisible = false">Cancel</el-button>
                     <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
@@ -153,6 +153,7 @@ export default {
       showDiscountModal: false,
       showPaymentTypeModal: false,
       selectedCoin: "",
+      addingProduct: false,
       coins: [
         {
           name: "ETH",

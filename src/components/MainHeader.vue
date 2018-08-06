@@ -5,7 +5,7 @@
         </span>
         <span>
             <el-input placeholder="Please input" v-model="searchBar" class="input-with-select">
-                <el-select v-model="select" slot="prepend" placeholder="Select">
+                <el-select aria-placeholder="Categories" v-model="select" slot="prepend">
                     <el-option label="Restaurant" value="1"></el-option>
                     <el-option label="Order No." value="2"></el-option>
                     <el-option label="Tel" value="3"></el-option>

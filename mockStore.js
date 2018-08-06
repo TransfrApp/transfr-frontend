@@ -8,6 +8,7 @@ const store = new Vuex.Store({
         count: 0,
         loginFlow: 'signin', // can be 'sigin', 'create', 'type,
         coinType: '',
+        addingProduct: 'adding', // can be 'adding', or 'new-category'
     },
     mutations: {
         increment (state) {state.count++},
