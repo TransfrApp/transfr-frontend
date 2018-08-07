@@ -1,16 +1,22 @@
 <template>
     <div class="container">
-        <main-header></main-header>
+        <main-header handleAddProduct="handleAddProduct"></main-header>
         <div class="main">
 
-            <div class="products" v-if="products.length == 0" @click="addingProduct = true">
-                <h4>You Have No Products</h4>
-                <h4>Click the button below to add a product</h4>
+            <!-- Prompts the user to add a prouct -->
+
+            <div class="products" v-if="products.length == 0 && addingProduct === false" @click="addingProduct = true">
+               <div class="products-text">
+                    <h4>You Have No Products</h4>
+                    <h4>Click the button below to add a product</h4>
+               </div>
                 <div class="toggle-add-product-button">
                     <i class="el-icon-plus add-product-icon"></i>
                     <h4>Add Product</h4>
                 </div>
             </div>
+
+            <!-- Displays all the products -->
 
             <div v-if="products.length > 0" class="product-list-view">
                 <h4>All Products</h4>
@@ -30,12 +36,32 @@
                 </div>
             </div>
 
+            <!-- Add a product window -->
+
             <div class="add-product-square" v-if="addingProduct == true">
-                <h2>Add a new Product</h2>
-                <el-input class="product-input" placeholder="Name of product"/>
-                <el-select class="product-input" placeholder="Category" />
-                <el-button @click="addProduct">Test Button</el-button>
+                <div class="center-product-square" v-if="addProdImage === false">
+                    <h2>Add a new Product</h2>
+                    <el-input class="product-input" v-model="newProdName" placeholder="Name of product"/>
+                    <el-input class="product-input" placeholder="How Much Is It?" v-model="newProdPrice"/>
+                    <el-select class="product-input" placeholder="Category">
+                        <el-option label="Food" value="food"></el-option>
+                        <el-option label="Drinks" value="drink"></el-option>
+                        <el-option label="Liquor" value="liquor"></el-option>
+                    </el-select>
+                    <el-button class="button" @click="addProdImage = true">Next</el-button>
+                </div>
+                <div class="center-product-square" v-if="addProdImage === true">
+                    <h2>Add an Image</h2>
+                   <a @click="uploadImage">
+                        <img src="../assets/add-image.png"/>
+                   </a>
+                    <el-button @click="handleAddProduct" class="button">
+                        <span>Submit</span>
+                    </el-button>
+                </div>
             </div>
+
+            <!-- Check Out Flow -->
 
             <div class="checkout">
                 <h4>Current Checkout</h4>
@@ -90,19 +116,6 @@
                 </div>
             </div>
 
-            <!-- Dialogue Box for the user to add a product -->
-            <el-dialog
-                :modalAppendToBody="false"
-                title="Add a Product"
-                :visible.sync="addingProduct"
-                width="30%">
-                <el-input placeholder="Product Name"/>
-                <span slot="footer" class="dialog-footer">
-                    <el-button @click="dialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
-                </span>
-            </el-dialog>
-
             <!-- Dialogue Box for Adding a Discount -->
             <el-dialog 
                 :modalAppendToBody="false"
@@ -149,11 +162,15 @@ export default {
   data() {
     return {
       addingProduct: false,
+      addProdImage: false,
       dialogVisible: false,
       showDiscountModal: false,
       showPaymentTypeModal: false,
       selectedCoin: "",
-      addingProduct: false,
+      // New Product State Stuff
+      newProdName: "",
+      newProdCat: "",
+      newProdPrice: "",
       coins: [
         {
           name: "ETH",
@@ -185,62 +202,50 @@ export default {
         }
       ],
       products: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80",
-          title: "Product",
-          price: 45,
-          quantity: 1
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80",
-          title: "Product",
-          price: 35,
-          quantity: 1
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9647d95a500b5e222258fb03ed086ed1&auto=format&fit=crop&w=800&q=80",
-          title: "Product",
-          price: 40,
-          quantity: 1
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=716729f150e7137d6873291d1ef9c9a4&auto=format&fit=crop&w=634&q=80",
-          title: "Product",
-          price: 45,
-          quantity: 1
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a98ac47048f530b6d587279d52c13ab7&auto=format&fit=crop&w=1268&q=80",
-          title: "Product",
-          price: 55,
-          quantity: 1
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=74ac7c1aa35dc36f50cc1ac7517c70a7&auto=format&fit=crop&w=1350&q=80",
-          title: "Product",
-          price: 45,
-          quantity: 1
-        }
-      ],
-      checkoutItems: [
-        //  {
-        //     image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80',
-        //     title: 'Product',
-        //     price: 45,
-        //     quantity: 1
-        // },{
-        //     image: 'https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80',
-        //     title: 'Product',
-        //     price: 35,
-        //     quantity: 1
+        // {
+        //   image:
+        //     "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c7af156881360cd678f19062bd9c1f8a&auto=format&fit=crop&w=634&q=80",
+        //   title: "Product",
+        //   price: 45,
+        //   quantity: 1
         // },
+        // {
+        //   image:
+        //     "https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f2d35c4ea30a81e428e66c653748f91&auto=format&fit=crop&w=621&q=80",
+        //   title: "Product",
+        //   price: 35,
+        //   quantity: 1
+        // },
+        // {
+        //   image:
+        //     "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9647d95a500b5e222258fb03ed086ed1&auto=format&fit=crop&w=800&q=80",
+        //   title: "Product",
+        //   price: 40,
+        //   quantity: 1
+        // },
+        // {
+        //   image:
+        //     "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=716729f150e7137d6873291d1ef9c9a4&auto=format&fit=crop&w=634&q=80",
+        //   title: "Product",
+        //   price: 45,
+        //   quantity: 1
+        // },
+        // {
+        //   image:
+        //     "https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a98ac47048f530b6d587279d52c13ab7&auto=format&fit=crop&w=1268&q=80",
+        //   title: "Product",
+        //   price: 55,
+        //   quantity: 1
+        // },
+        // {
+        //   image:
+        //     "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=74ac7c1aa35dc36f50cc1ac7517c70a7&auto=format&fit=crop&w=1350&q=80",
+        //   title: "Product",
+        //   price: 45,
+        //   quantity: 1
+        // }
       ],
+      checkoutItems: [],
       activeItemQuantity: 0,
       subtotal: 0,
       tax: 0,
@@ -287,6 +292,22 @@ export default {
       this.tax = 0;
       this.discount = 0;
       this.completedTransaction = false;
+    },
+    uploadImage() {
+        // Need to write logic to get the image from FS
+        alert("Fetching Image");
+    },
+    handleAddProduct() {
+        const newProd = {
+            image: "../assets/add-image.png", // Need to figure this part out...is it a URL, or what.
+            title: this.newProdName,
+            price: parseFloat(this.newProdPrice),
+            quantity: 1
+        }
+        this.products.push(newProd);
+        // Switch off entry window
+        this.addingProduct = false;
+        this.addProdImage = false;
     }
   }
 };
@@ -332,7 +353,7 @@ h4 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-content: space-around;
   align-items: center;
   height: 165px;
   width: 165px;
@@ -342,6 +363,15 @@ h4 {
 .add-product-icon {
   color: #b1b5c2;
   font-size: 55px;
+}
+
+.center-product-square {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .add-product-square {
@@ -364,6 +394,10 @@ h4 {
   justify-content: center;
   align-content: center;
   align-items: center;
+}
+
+.products .products-text {
+    padding-bottom: 10%;
 }
 
 .checkout {
@@ -592,5 +626,19 @@ el-dialog {
 }
 .completed-payment .header-section {
   width: 80%;
+}
+
+/* Styling for adding product flow*/
+.button {
+    width: 50%;
+    height: 10%;
+    background: linear-gradient(to right, #6532bd, #7d3bb7);
+    color: white;
+}
+
+.center-product-square img {
+    height: 180px;
+    width: auto;
+    padding: 6% 0 12% 15px;
 }
 </style>

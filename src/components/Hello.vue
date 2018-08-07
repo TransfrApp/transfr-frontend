@@ -40,9 +40,6 @@ export default {
   methods: {
     login() {
       alert("Login Pressed")
-    },
-    created () {
-      console.log("This", this);
     }
   }
 };

@@ -14,7 +14,7 @@
             </el-input>
         </span>
         <span id="add-button-span" class="right">
-            <el-button id="add-item-button" icon="el-icon-plus">
+            <el-button @click="handleAddProduct" id="add-item-button" icon="el-icon-plus">
                 <span>Add Product</span>
             </el-button>
         </span>
@@ -22,15 +22,20 @@
 </template>
 <script>
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-
+import store from '../../mockStore.js';
 export default {
     data() {
         return {
             searchBar:''
         }
     },
+    nethods: {
+        handleAddProduct(){
+            this.store.commit("addProduct", "adding");
+        }
+    },
     components: {
-        FontAwesomeIcon,
+        FontAwesomeIcon
     }
 }
 </script>
